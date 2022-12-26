@@ -26,10 +26,14 @@ export default function App() {
             },
 
             640: {
-              slidesPerView: 2,
-              spaceBetween: 30,
+              slidesPerView: 1,
+              spaceBetween: 20,
             },
-            1080: {
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1024: {
               slidesPerView: 3,
               spaceBetween: 30,
             },
@@ -51,7 +55,7 @@ export default function App() {
         <SwiperSlide className="">
           <Link
             to="/shop/men/4"
-            className=" h-[350px] shadow-md flex flex-col-reverse items-center rounded-md text-white bg-[url('https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=369&q=80')] bg-center bg-cover hover-75"
+            className=" h-[350px]  shadow-md flex flex-col-reverse items-center rounded-md text-white bg-[url('https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=369&q=80')] bg-center bg-cover hover-75"
           >
             <button className=" py-2 bg-white text-black mb-8 w-fit px-16 rounded text-xl font-semibold">
               Shop

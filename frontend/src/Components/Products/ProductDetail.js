@@ -7,14 +7,19 @@ import { addToCart } from "../../Reducers/cart";
 
 function ProductDetail() {
   const dispatch = useDispatch();
-  const { category, productid } = useParams();
+  let { category, productid } = useParams();
   const product = products[productid - 1];
-
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const [added, setAdded] = useState(false);
+  const resetAdded = setTimeout(() => setAdded(false), 1200);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
+  }
+
+  if (category === undefined) {
+    category = product.category;
   }
 
   return (
@@ -168,10 +173,16 @@ function ProductDetail() {
               onClick={(e) => {
                 e.preventDefault();
                 dispatch(addToCart(product));
+                setAdded(true);
+                resetAdded();
               }}
-              className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-gray-700 py-3 px-8 text-base font-medium text-white hover:bg-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className={
+                added
+                  ? "mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 py-3 px-8 text-base font-medium text-white "
+                  : "mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-gray-700 py-3 px-8 text-base font-medium text-white hover:bg-black "
+              }
             >
-              Add to bag
+              {added ? "Item added to bag" : "Add to bag"}
             </button>
           </form>
         </div>

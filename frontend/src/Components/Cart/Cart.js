@@ -35,6 +35,9 @@ const Cart = (props) => {
             </IconContext.Provider>
           </button>
         </div>
+        <div className="col-span-4 text-black flex justify-center mt-6">
+          <p className="text-xl md:text-2xl font-semibold">Your Bag </p>
+        </div>
         <div className="my-8 px-12 grid grid-cols-4 md:gap-x-8 ">
           {cart.length > 0 ? (
             <>

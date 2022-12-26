@@ -1,10 +1,12 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Reducers/cart";
 
 function ProductCard(props) {
   const dispatch = useDispatch();
+  const [added, setAdded] = useState(false);
+  const resetAdded = setTimeout(() => setAdded(false), 1200);
 
   return (
     <div key={props.id} className="">
@@ -26,12 +28,18 @@ function ProductCard(props) {
       </Link>
 
       <button
-        className="w-full text-md font-bold py-3 bg-gray-700 hover:bg-black mt-3 rounded-md text-white"
+        className={
+          added
+            ? "w-full text-md font-bold py-3 bg-green-600  mt-3 rounded-md text-white "
+            : "w-full text-md font-bold py-3 bg-gray-700 hover:bg-black mt-3 rounded-md text-white"
+        }
         onClick={() => {
           dispatch(addToCart(props));
+          setAdded(true);
+          resetAdded();
         }}
       >
-        Add to bag
+        {added ? "Item added to bag" : "add to bag"}
       </button>
     </div>
   );

@@ -1,14 +1,14 @@
 import React from "react";
 import Container from "../Components/Container/Container";
-import Login from "../Components/Auth/Login";
+import LoginForm from "../Components/Auth/Login";
 import Signup from "../Components/Auth/Signup";
 
-function Auth() {
+function Login() {
   return (
     <Container>
-      <Login />
+      <LoginForm />
     </Container>
   );
 }
 
-export default Auth;
+export default Login;

@@ -1,39 +1,27 @@
 import { useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
+import SearchBar from "./SearchBar";
 import { IconContext } from "react-icons";
 import { CgProfile } from "react-icons/cg";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Drawer from "./Drawer";
+import { CgMenu } from "react-icons/cg";
 import Cart from "../Cart/Cart";
 import { useSelector } from "react-redux";
 
-function NavBar() {
+function NavBar({ drawer, openDrawer }) {
   const [isOpen, setIsOpen] = useState(false);
   const { cart } = useSelector((state) => state);
-
+  const navigate = useNavigate();
   return (
-    <div className="w-full h-10 bg-black flex py-9 md:px-10 lg:px-20  items-center justify-between text-white text-gray-200">
+    <div className="w-full h-10  flex py-9 px-2 md:px-10 lg:px-20  items-center justify-between text-white text-gray-200">
       <div>
         <Link to="/">
           <p className="text-3xl font-semibold mx-4 hover:opacity-75">Ecom</p>
         </Link>
       </div>
-      <div className="w-full hidden md:max-w-md lg:max-w-2xl md:flex  rounded bg-white items-center ">
-        <input
-          type="text"
-          name="search"
-          className="w-full h-[35px] ml-4 rounded  border-none text-black  sm:text-sm focus:outline-none"
-          placeholder="  Search products"
-        />
-        <IconContext.Provider
-          value={{ size: "1.5rem", className: "mx-2 text-gray-400" }}
-        >
-          <button>
-            <BiSearchAlt2 />
-          </button>
-        </IconContext.Provider>
-      </div>
-      <div className="space-x-4 lg:space-x-8">
+      <SearchBar />
+      <div className="space-x-4 lg:space-x-8 hidden md:block">
         <IconContext.Provider
           value={{
             size: "2rem",
@@ -59,11 +47,27 @@ function NavBar() {
             className: "text-gray-400 hover:text-white",
           }}
         >
-          <button>
+          <button onClick={() => navigate("/login")}>
             <CgProfile />
           </button>
         </IconContext.Provider>
       </div>
+      <div
+        className=" md:hidden sm:block lg:hidden"
+        onClick={() => {
+          openDrawer(!drawer);
+        }}
+      >
+        <IconContext.Provider
+          value={{
+            size: "2rem",
+            className: "text-gray-400 hover:text-white ",
+          }}
+        >
+          <CgMenu />
+        </IconContext.Provider>
+      </div>
+
       {isOpen && <Cart isOpen={isOpen} setIsOpen={setIsOpen} />}
     </div>
   );

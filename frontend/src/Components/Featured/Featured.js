@@ -54,7 +54,7 @@ export default function App() {
       >
         <SwiperSlide className="">
           <Link
-            to="/shop/men/4"
+            to="/shop/men/63aa56fac2f5aa7064e7316d"
             className=" h-[350px]  shadow-md flex flex-col-reverse items-center rounded-md text-white bg-[url('https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=369&q=80')] bg-center bg-cover hover-75"
           >
             <button className=" py-2 bg-white text-black mb-8 w-fit px-16 rounded text-xl font-semibold">
@@ -64,7 +64,7 @@ export default function App() {
         </SwiperSlide>
         <SwiperSlide>
           <Link
-            to="/shop/women/9"
+            to="/shop/women/63aa5765c2f5aa7064e73177"
             className=" h-[350px] shadow-md flex flex-col-reverse items-center rounded-md text-white bg-[url('https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2xvdGhlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60')] bg-center bg-cover hover-75"
           >
             <button className=" py-2 bg-white text-black mb-8 w-fit px-16 rounded text-xl font-semibold">
@@ -74,7 +74,7 @@ export default function App() {
         </SwiperSlide>
         <SwiperSlide className="">
           <Link
-            to="/shop/men/8"
+            to="/shop/men/63aa5752c2f5aa7064e73175"
             className=" h-[350px] shadow-md flex flex-col-reverse items-center  rounded-md text-white bg-[url('https://images.unsplash.com/photo-1611312449412-6cefac5dc3e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODN8fGNsb3RoZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60')] bg-center bg-cover hover-75"
           >
             <button className=" py-2 bg-white text-black mb-8 w-fit px-16 rounded text-xl font-semibold">
@@ -84,7 +84,7 @@ export default function App() {
         </SwiperSlide>
         <SwiperSlide className="">
           <Link
-            to="/shop/men/10"
+            to="/shop/men/63aa5783c2f5aa7064e73179"
             className=" h-[350px] shadow-md  flex flex-col-reverse items-center rounded-md text-white bg-[url('https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80')] bg-center bg-cover hover-75"
           >
             <button className=" py-2 bg-white text-black mb-8 w-fit px-16 rounded text-xl font-semibold">

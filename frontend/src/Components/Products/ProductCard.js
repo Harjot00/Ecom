@@ -9,8 +9,8 @@ function ProductCard(props) {
   const resetAdded = setTimeout(() => setAdded(false), 1200);
 
   return (
-    <div key={props.id} className="">
-      <Link to={`${props.id}`}>
+    <div key={props._id} className="">
+      <Link to={`${props._id}`}>
         <div className="h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 hover:opacity-75 ">
           <img
             src={props.imageSrc}
@@ -21,7 +21,6 @@ function ProductCard(props) {
         <div className="mt-4 flex justify-between">
           <div>
             <h3 className="text-sm text-gray-700">{props.name}</h3>
-            <p className="mt-1 text-sm text-gray-500">{props.color}</p>
           </div>
           <p className="text-sm font-medium text-gray-900">${props.price}</p>
         </div>

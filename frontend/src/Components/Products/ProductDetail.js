@@ -1,17 +1,32 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import products from "../../Reducers/products";
 import { RadioGroup } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Reducers/cart";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 function ProductDetail() {
-  const dispatch = useDispatch();
   let { category, productid } = useParams();
-  const product = products[productid - 1];
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const fetchproduct = async () => {
+    const response = await axios.get(
+      `http://localhost:3000/api/getproduct/${productid}`
+    );
+    return response.data;
+  };
+  const {
+    isLoading,
+    isError,
+    data: product,
+    error,
+  } = useQuery("product", fetchproduct);
+
+  const dispatch = useDispatch();
+
   const [added, setAdded] = useState(false);
+  const [selectedColor, setSelectedColor] = useState(
+    product?.colors ? [0] : "black"
+  );
   const resetAdded = setTimeout(() => setAdded(false), 1200);
 
   function classNames(...classes) {
@@ -20,6 +35,14 @@ function ProductDetail() {
 
   if (category === undefined) {
     category = product.category;
+  }
+
+  window.scroll(0, 0);
+
+  if (isLoading) {
+    return <p>isLoading</p>;
+  } else if (error) {
+    return <p>error</p>;
   }
 
   return (
@@ -54,13 +77,12 @@ function ProductDetail() {
               <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
               <RadioGroup
-                value={selectedColor}
-                onChange={setSelectedColor}
                 className="mt-4"
+                value={selectedColor}
+                onChange={(e) => setSelectedColor(e)}
               >
                 <RadioGroup.Label className="sr-only">
-                  {" "}
-                  Choose a color{" "}
+                  Choose a color
                 </RadioGroup.Label>
                 <div className="flex items-center space-x-3">
                   {product.colors.map((color) => (
@@ -100,11 +122,7 @@ function ProductDetail() {
                 <p className="text-sm font-medium text-gray-400 ">Size guide</p>
               </div>
 
-              <RadioGroup
-                value={selectedSize}
-                onChange={setSelectedSize}
-                className="mt-4"
-              >
+              <RadioGroup className="mt-4">
                 <RadioGroup.Label className="sr-only">
                   {" "}
                   Choose a size{" "}

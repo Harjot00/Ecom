@@ -2,12 +2,35 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Container from "../Components/Container/Container";
 import ProductCard from "../Components/Products/ProductCard";
+import { useQuery, useQueryClient } from "react-query";
+import axios from "axios";
 import products from "../Reducers/products";
 import { TbShirtOff } from "react-icons/tb";
 import { IconContext } from "react-icons/lib";
 
 function Shop() {
+  const queryClient = useQueryClient();
   const { category } = useParams();
+  const fetchproducts = async () => {
+    const response = await fetch(
+      `http://localhost:3000/api/getproductsby/${category}`
+    );
+    return response.json();
+  };
+  window.scroll(0, 0);
+
+  const {
+    isLoading,
+    isError,
+    data: products,
+    error,
+  } = useQuery("products", fetchproducts);
+
+  if (isLoading) {
+    return <p>isLoading</p>;
+  } else if (error) {
+    return <p>error</p>;
+  }
 
   return (
     <Container>
@@ -18,8 +41,7 @@ function Shop() {
             {category[0].toUpperCase() + category.slice(1).toLowerCase()}
           </h2>
           <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {products.length > 0 &&
-            products.some((item) => item.category === category) ? (
+            {products ? (
               products.map((item, key) => {
                 if (item.category === category) {
                   return <ProductCard {...item} key={key} />;

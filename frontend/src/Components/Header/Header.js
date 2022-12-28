@@ -43,7 +43,7 @@ function Header() {
               </button>
             </IconContext.Provider>
           </div>
-          <Link className="flex justify-center items-center" to="/auth">
+          <Link className="flex justify-center items-center" to="/login">
             <IconContext.Provider
               value={{
                 size: "2.5rem",

@@ -14,7 +14,9 @@ function Order(props) {
 
   const subTotal = calculateSubtotal(cart);
   const navigate = useNavigate();
-
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   return (
     <div className="bg-gray-100 rounded-xl p-4 drop-shadow">
       <p className="text-xl font-semibold text-black ">Order Summary</p>
@@ -34,9 +36,9 @@ function Order(props) {
       </div>
       <button
         className="w-full font-bold text-xl py-3 bg-gray-700 hover:bg-black  rounded-md text-white mt-8"
-        onClick={() => {
+        onClick={(e) => {
           if (props.page === "shipment") {
-            navigate("/shipment");
+            props.submitHandler(e);
           } else {
             navigate("/checkout");
             props.setIsOpen(false);

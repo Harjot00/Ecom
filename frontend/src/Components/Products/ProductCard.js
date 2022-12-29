@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Reducers/cart";
+import { useSelector } from "react-redux";
 
 function ProductCard(props) {
+  const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [added, setAdded] = useState(false);
-  const resetAdded = setTimeout(() => setAdded(false), 1200);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <div key={props._id} className="">
@@ -34,8 +38,8 @@ function ProductCard(props) {
         }
         onClick={() => {
           dispatch(addToCart(props));
+
           setAdded(true);
-          resetAdded();
         }}
       >
         {added ? "Item added to bag" : "add to bag"}

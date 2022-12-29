@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const orders = require("../Models/orders");
+const { createTokens, validateToken } = require("../Middleware/auth");
 
 const customers = require("../Models/customers");
 
-router.post("/placeOrder", async (req, res) => {
+router.post("/placeorder", validateToken, async (req, res) => {
   let newOrder;
   let customer;
-  let order;
   try {
-    customer = await customers.findOne({ _id: req.body.customerId });
+    customer = await customers.findById(req.cookies["customer_id"]);
 
     if (!customer) {
       return res.status(404).json("customer not found");
@@ -17,10 +17,12 @@ router.post("/placeOrder", async (req, res) => {
       newOrder = orders({
         orderDetail: { ...req.body.orderDetail },
         products: req.body.products,
-        customer: customer._id,
+        customer: req.cookies["customer_id"],
       });
       newOrder.save().then(() => {
         customer.orders.push(newOrder._id);
+
+        customer.save();
         return res.status(200).json("order placed in the database");
       });
     }
@@ -28,7 +30,7 @@ router.post("/placeOrder", async (req, res) => {
     return res.status(500).json(err);
   }
 });
-router.delete("/cancelOrder/:id", async (req, res) => {
+router.delete("/cancelOrder/:id", validateToken, async (req, res) => {
   let order;
 
   try {
@@ -44,7 +46,7 @@ router.delete("/cancelOrder/:id", async (req, res) => {
   }
 });
 
-router.get("/orderDetail/:id", async (req, res) => {
+router.get("/orderDetail/:id", validateToken, async (req, res) => {
   let order;
   try {
     order = await orders.findOne({ _id: req.params.id });

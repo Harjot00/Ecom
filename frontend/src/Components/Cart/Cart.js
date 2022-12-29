@@ -10,7 +10,7 @@ const Cart = (props) => {
   const { cart } = useSelector((state) => state);
 
   return (
-    <div className="absolute z-10 inset-0 h-[100%]  flex items-center justify-center ">
+    <div className="absolute z-10 inset-0 h-screen  flex items-center justify-center ">
       <div className="absolute z-5 inset-0 bg-black opacity-40 "></div>
       <div className="absolute z-10 top-[100px] left-0 right-0 text-white w-10/12   m-auto bg-white rounded-2xl  ">
         <div className="absolute top-0 right-0 ">
@@ -35,7 +35,7 @@ const Cart = (props) => {
             </IconContext.Provider>
           </button>
         </div>
-        <div className="col-span-4 text-black flex justify-center mt-6">
+        <div className=" text-black flex justify-center mt-6">
           <p className="text-xl md:text-2xl font-semibold">Your Bag </p>
         </div>
         <div className="my-8 px-12 grid grid-cols-4 md:gap-x-8 ">

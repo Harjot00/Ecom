@@ -11,6 +11,7 @@ import Shipment from "./Pages/Shipment";
 import Search from "./Pages/Search";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import Profile from "./Pages/Profile";
 
 function App() {
   const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ function App() {
           <Route path="/shipment" element={<Shipment />} />
           <Route path="/search/:query" element={<Search />} />
           <Route path="/search/:query/:productid" element={<Product />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />
         <ReactQueryDevtools initialIsOpen={false} />

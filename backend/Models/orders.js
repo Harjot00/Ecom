@@ -10,13 +10,13 @@ const orderDetailSchema = new Schema({
     type: String,
     required: true,
   },
-  email: {
+
+  streetAddress: {
     type: String,
     required: true,
   },
-  address: {
+  apartment: {
     type: String,
-    required: true,
   },
   city: {
     type: String,
@@ -34,13 +34,6 @@ const orderDetailSchema = new Schema({
     type: Number,
     required: true,
   },
-  products: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "products",
-      required: true,
-    },
-  ],
 });
 
 const orderSchema = new Schema({
@@ -56,6 +49,13 @@ const orderSchema = new Schema({
     default: Date.now(),
   },
   orderDetail: orderDetailSchema,
+  products: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Products",
+      required: true,
+    },
+  ],
 });
 
 const orders = mongoose.model("Orders", orderSchema);

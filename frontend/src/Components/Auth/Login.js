@@ -1,13 +1,14 @@
 import { useState } from "react";
 import Container from "../Container/Container";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
 import { useMutation } from "react-query";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../Reducers/auth";
 
 function Login() {
   const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state);
 
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
@@ -20,10 +21,17 @@ function Login() {
   };
 
   const loginFn = async (data) => {
-    const response = await axios.post(`http://localhost:3000/api/login`, data);
+    const response = await axios.post(`http://localhost:3000/api/login`, data, {
+      credentials: "include",
+      withCredentials: true,
+    });
     return await response.data;
   };
   const mutation = useMutation(() => loginFn(loginData));
+
+  if (isLoggedIn) {
+    redirect("/");
+  }
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -31,7 +39,8 @@ function Login() {
       .mutateAsync(loginData)
       .then((data) => {
         console.log(data);
-        dispatch(login(data));
+        dispatch(login());
+        localStorage.setItem("isLoggedIn", true);
         navigate("/");
       })
       .catch((err) => {

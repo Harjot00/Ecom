@@ -2,6 +2,7 @@ const express = require("express");
 const customers = require("../Models/customers");
 const bcrypt = require("bcrypt");
 const router = express.Router();
+const { createToken, validateToken } = require("../Middleware/auth");
 
 router.post("/signup", async (req, res) => {
   const {
@@ -42,11 +43,21 @@ router.post("/signup", async (req, res) => {
     await newCustomer
       .save()
       .then(() => {
-        res.status(200).json({ id: newCustomer._id, loggedIn: true });
+        const accessToken = createToken(newCustomer);
+
+        res.cookie("access_token", accessToken, {
+          httpOnly: true,
+          secure: true,
+        });
+        res.cookie("customer_id", newCustomer._id, {
+          httpOnly: true,
+          secure: true,
+        });
+        res.status(200).json({ loggedIn: true });
       })
       .catch((err) => {
-        res.status(500).json({ err });
         console.log(err);
+        res.status(500).json(err);
       });
   }
 });
@@ -67,25 +78,46 @@ router.post("/login", async (req, res) => {
         return res.status(404).json("Password is incorrect");
       }
 
-      return res.status(200).json({ loggedIn: true, id: customer._id });
+      const accessToken = createToken(customer);
+      res.cookie("access_token", accessToken, {
+        httpOnly: true,
+        secure: false,
+      });
+      res.cookie("customer_id", customer._id, {
+        httpOnly: true,
+        secure: false,
+      });
+
+      return res.status(200).json({ loggedIn: true });
     }
   } catch (err) {
     return res.status(500).json(err);
   }
 });
 
-router.get("/allOrders/:id", async (req, res) => {
+router.get("/allorders", validateToken, async (req, res) => {
   let allOrders;
 
   try {
     allOrders = await customers
-      .findOne({ _id: req.params.id })
-      .populate("orders");
+      .findOne({ _id: req.cookies["customer_id"] })
+      .populate({
+        path: "orders",
+        populate: {
+          path: "products",
+        },
+      });
 
-    if (!allOrders) {
+    const customerOrders = [];
+
+    for (const order of allOrders.orders) {
+      customerOrders.push({ id: order._id, products: order.products });
+    }
+
+    if (!customerOrders) {
       return res.status(404).json("no customer found");
     } else {
-      return res.status(200).json(allOrders);
+      return res.status(200).json(customerOrders);
     }
   } catch (err) {
     console.log(err);

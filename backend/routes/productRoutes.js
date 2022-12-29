@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const products = require("../Models/products");
+const { createTokens, validateToken } = require("../Middleware/auth");
 
 router.get("/getproducts", async (req, res) => {
   let allProducts;
   try {
     allProducts = await products.find({});
+
     return res.status(200).json(allProducts);
   } catch (err) {
     console.log(err);
@@ -14,7 +16,7 @@ router.get("/getproducts", async (req, res) => {
 });
 router.get("/getproduct/:id", async (req, res) => {
   let product;
-  console.log(req.params);
+
   try {
     product = await products.findOne({ _id: req.params.id });
 
@@ -30,6 +32,7 @@ router.get("/getproduct/:id", async (req, res) => {
 });
 router.get("/getproductsby/:category", async (req, res) => {
   let productsByCategory;
+
   try {
     productsByCategory = await products.find({
       category: req.params.category,

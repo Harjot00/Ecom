@@ -2,20 +2,20 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Container from "../Components/Container/Container";
 import ProductCard from "../Components/Products/ProductCard";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import axios from "axios";
-import products from "../Reducers/products";
-import { TbShirtOff } from "react-icons/tb";
-import { IconContext } from "react-icons/lib";
 
 function Shop() {
-  const queryClient = useQueryClient();
   const { category } = useParams();
   const fetchproducts = async () => {
-    const response = await fetch(
-      `http://localhost:3000/api/getproductsby/${category}`
+    const response = await axios.get(
+      `http://localhost:3000/api/getproductsby/${category}`,
+      {
+        credentials: "include",
+        withCredentials: true,
+      }
     );
-    return response.json();
+    return response.data;
   };
   window.scroll(0, 0);
 
@@ -25,12 +25,6 @@ function Shop() {
     data: products,
     error,
   } = useQuery("products", fetchproducts);
-
-  if (isLoading) {
-    return <p>isLoading</p>;
-  } else if (error) {
-    return <p>error</p>;
-  }
 
   return (
     <Container>

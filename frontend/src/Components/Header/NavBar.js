@@ -4,14 +4,17 @@ import { IconContext } from "react-icons";
 import { CgProfile } from "react-icons/cg";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { useNavigate, Link } from "react-router-dom";
-import Drawer from "./Drawer";
 import { CgMenu } from "react-icons/cg";
 import Cart from "../Cart/Cart";
 import { useSelector } from "react-redux";
 
 function NavBar({ drawer, openDrawer }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { cart } = useSelector((state) => state);
+  const {
+    cart,
+    auth: { isLoggedIn },
+  } = useSelector((state) => state);
+
   const navigate = useNavigate();
   return (
     <div className="w-full h-10  flex py-9 px-2 md:px-10 lg:px-20  items-center justify-between text-white text-gray-200">
@@ -47,7 +50,11 @@ function NavBar({ drawer, openDrawer }) {
             className: "text-gray-400 hover:text-white",
           }}
         >
-          <button onClick={() => navigate("/login")}>
+          <button
+            onClick={() => {
+              isLoggedIn === true ? navigate("/profile") : navigate("/login");
+            }}
+          >
             <CgProfile />
           </button>
         </IconContext.Provider>

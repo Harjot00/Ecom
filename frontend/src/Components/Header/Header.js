@@ -6,12 +6,16 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
 import { useSelector } from "react-redux";
 import Cart from "../Cart/Cart";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [drawer, setOpenDrawer] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { cart } = useSelector((state) => state);
+  const navigate = useNavigate();
+  const {
+    cart,
+    auth: { isLoggedIn },
+  } = useSelector((state) => state);
   const drawerData = { drawer: drawer, openDrawer: setOpenDrawer };
 
   return (
@@ -43,18 +47,24 @@ function Header() {
               </button>
             </IconContext.Provider>
           </div>
-          <Link className="flex justify-center items-center" to="/login">
+          <div className="flex justify-center items-center">
             <IconContext.Provider
               value={{
                 size: "2.5rem",
                 className: "text-gray-400 hover:text-white",
               }}
             >
-              <button>
+              <button
+                onClick={() => {
+                  isLoggedIn === true
+                    ? navigate("/profile")
+                    : navigate("/login");
+                }}
+              >
                 <CgProfile />
               </button>
             </IconContext.Provider>
-          </Link>
+          </div>
         </div>
       )}
       {isOpen && <Cart isOpen={isOpen} setIsOpen={setIsOpen} />}

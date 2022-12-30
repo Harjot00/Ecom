@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const orderDetailSchema = new Schema({
+const customerDetailSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -36,6 +36,21 @@ const orderDetailSchema = new Schema({
   },
 });
 
+const orderDetailsSchema = new Schema({
+  subTotal: {
+    type: Number,
+    required: true,
+  },
+  shipping: {
+    type: Number,
+    required: true,
+  },
+  orderTotal: {
+    type: Number,
+    required: true,
+  },
+});
+
 const orderSchema = new Schema({
   customer: [
     {
@@ -48,7 +63,14 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
-  orderDetail: orderDetailSchema,
+  orderDetail: {
+    type: orderDetailsSchema,
+    required: true,
+  },
+  customerDetail: {
+    type: customerDetailSchema,
+    required: true,
+  },
   products: [
     {
       type: Schema.Types.ObjectId,

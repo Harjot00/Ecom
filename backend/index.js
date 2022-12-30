@@ -19,7 +19,15 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-app.use(cors({ origin: true, credentials: true }));
+app.use(
+  cors({
+    origin: ["http://localhost:3001", "http://192.168.2.21:3001"],
+    credentials: true,
+  })
+);
+
+app.options("*", cors());
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cookieParser());

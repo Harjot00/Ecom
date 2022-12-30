@@ -9,12 +9,9 @@ function Shop() {
   const { category } = useParams();
   const fetchproducts = async () => {
     const response = await axios.get(
-      `http://localhost:3000/api/getproductsby/${category}`,
-      {
-        credentials: "include",
-        withCredentials: true,
-      }
+      `http://localhost:3000/api/getproductsby/${category}`
     );
+
     return response.data;
   };
   window.scroll(0, 0);
@@ -24,7 +21,9 @@ function Shop() {
     isError,
     data: products,
     error,
-  } = useQuery("products", fetchproducts);
+  } = useQuery("products", fetchproducts, {
+    retry: 3,
+  });
 
   return (
     <Container>

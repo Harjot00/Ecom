@@ -27,10 +27,12 @@ function Login() {
     });
     return await response.data;
   };
-  const mutation = useMutation(() => loginFn(loginData));
+  const mutation = useMutation(() => loginFn(loginData), {
+    retry: 3,
+  });
 
   if (isLoggedIn) {
-    redirect("/");
+    redirect("/profile");
   }
 
   const submitHandler = async (e) => {

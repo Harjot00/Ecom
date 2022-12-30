@@ -13,7 +13,7 @@ function Checkout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { cart, isLoggedIn } = useSelector((state) => state);
-  const [orderDetail, setOrderDetail] = useState({
+  const [customerDetail, setcustomerDetail] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -25,7 +25,24 @@ function Checkout() {
     postalCode: "",
     phoneNumber: "",
   });
+
+  const calculateSubtotal = (cart) => {
+    let SubTotal = 0;
+    for (const cartItem of cart) {
+      SubTotal += cartItem.price;
+    }
+    return SubTotal;
+  };
+
+  const subTotal = calculateSubtotal(cart);
+
+  const orderDetail = {
+    subTotal: subTotal,
+    shipping: 20,
+    orderTotal: subTotal + 20,
+  };
   const order = {
+    customerDetail: customerDetail,
     orderDetail: orderDetail,
     products: cart,
   };
@@ -39,7 +56,6 @@ function Checkout() {
         withCredentials: true,
       }
     );
-    console.log(data);
     return response.data;
   };
 
@@ -68,8 +84,8 @@ function Checkout() {
       <div className="mt-4 md:mt-12 mb-8 md:px-4 py-8 grid grid-cols-4 md:gap-x-4 bg-gray-100 rounded-md drop-shadow-lg">
         <div className="col-span-4 md:col-span-2">
           <CheckoutForm
-            orderDetail={orderDetail}
-            setOrderDetail={setOrderDetail}
+            customerDetail={customerDetail}
+            setcustomerDetail={setcustomerDetail}
           />
         </div>
         <div className="col-span-4 md:col-span-2 max-h-[800px] overflow-y-scroll  lg:p-8">

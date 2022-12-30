@@ -14,7 +14,12 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Profile from "./Pages/Profile";
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    queries: {
+      refetchOnWindowFocus: false,
+      retryDelay: 3000,
+    },
+  });
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>

@@ -37,7 +37,9 @@ function Signup() {
     return response.data;
   };
 
-  const mutation = useMutation((data) => signUpFn(data));
+  const mutation = useMutation((data) => signUpFn(data), {
+    retry: 3,
+  });
 
   const authFn = async () => {
     mutation.mutate(signUpData);

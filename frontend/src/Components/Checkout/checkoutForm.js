@@ -2,8 +2,8 @@ import { useState } from "react";
 
 function CheckoutForm(props) {
   const changeHandler = (event) => {
-    props.setOrderDetail({
-      ...props.orderDetail,
+    props.setcustomerDetail({
+      ...props.customerDetail,
       [event.target.name]: event.target.value,
     });
   };

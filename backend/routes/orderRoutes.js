@@ -15,9 +15,10 @@ router.post("/placeorder", validateToken, async (req, res) => {
       return res.status(404).json("customer not found");
     } else {
       newOrder = orders({
-        orderDetail: { ...req.body.orderDetail },
         products: req.body.products,
         customer: req.cookies["customer_id"],
+        customerDetail: req.body.customerDetail,
+        orderDetail: req.body.orderDetail,
       });
       newOrder.save().then(() => {
         customer.orders.push(newOrder._id);
@@ -30,7 +31,7 @@ router.post("/placeorder", validateToken, async (req, res) => {
     return res.status(500).json(err);
   }
 });
-router.delete("/cancelOrder/:id", validateToken, async (req, res) => {
+router.delete("/cancelorder/:id", validateToken, async (req, res) => {
   let order;
 
   try {
@@ -38,10 +39,12 @@ router.delete("/cancelOrder/:id", validateToken, async (req, res) => {
     if (!order) {
       return res.status(404).json("order not found");
     } else {
-      order.delete();
+      console.log(order);
+      await orders.deleteOne({ _id: req.params.id });
       return res.status(200).json("order deleted");
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 });

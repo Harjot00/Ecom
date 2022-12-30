@@ -64,6 +64,7 @@ router.post("/signup", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   let customer, isPasswordCorrect;
+  console.log(req.headers);
 
   try {
     customer = await customers.findOne({ email: req.body.email });
@@ -111,7 +112,11 @@ router.get("/allorders", validateToken, async (req, res) => {
     const customerOrders = [];
 
     for (const order of allOrders.orders) {
-      customerOrders.push({ id: order._id, products: order.products });
+      customerOrders.push({
+        id: order._id,
+        details: order.orderDetail,
+        products: order.products,
+      });
     }
 
     if (!customerOrders) {

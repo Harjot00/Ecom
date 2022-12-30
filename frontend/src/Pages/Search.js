@@ -1,14 +1,29 @@
 import React from "react";
 import Container from "../Components/Container/Container";
-import productsArr from "../Reducers/products";
+import axios from "axios";
+import { useQuery } from "react-query";
 import ProductCard from "../Components/Products/ProductCard";
 import { useParams } from "react-router-dom";
-import CartItems from "../Components/Cart/cartItem";
 
 function Search() {
-  const { query } = useParams();
+  const { query, category } = useParams();
+  const fetchproducts = async () => {
+    const response = await axios.get(`http://localhost:3000/api/getproducts/`);
 
-  const availableProducts = productsArr.filter((item) => {
+    return response.data;
+  };
+  window.scroll(0, 0);
+
+  const {
+    isLoading,
+    isError,
+    data: products,
+    error,
+  } = useQuery("products", fetchproducts, {
+    retry: 3,
+  });
+
+  const availableProducts = products.filter((item) => {
     if (item.name.includes(query)) {
       return item;
     }

@@ -12,11 +12,7 @@ function ProductDetail() {
 
   const fetchproduct = async () => {
     const response = await axios.get(
-      `http://localhost:3000/api/getproduct/${productid}`,
-      {
-        credentials: "include",
-        withCredentials: true,
-      }
+      `http://localhost:3000/api/getproduct/${productid}`
     );
     return response.data;
   };
@@ -27,7 +23,9 @@ function ProductDetail() {
     isError,
     data: product,
     error,
-  } = useQuery("product", fetchproduct);
+  } = useQuery("product", fetchproduct, {
+    retry: 3,
+  });
 
   const [quantity, setQuantity] = useState(1);
 
@@ -225,7 +223,7 @@ function ProductDetail() {
               <button
                 type="button"
                 onClick={(e) => {
-                  dispatch(addToCart(product)).then(() => {});
+                  dispatch(addToCart(product));
 
                   setAdded(true);
                 }}

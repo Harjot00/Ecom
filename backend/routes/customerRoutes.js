@@ -64,7 +64,6 @@ router.post("/signup", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   let customer, isPasswordCorrect;
-  console.log(req.headers);
 
   try {
     customer = await customers.findOne({ email: req.body.email });

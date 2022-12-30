@@ -39,7 +39,6 @@ router.delete("/cancelorder/:id", validateToken, async (req, res) => {
     if (!order) {
       return res.status(404).json("order not found");
     } else {
-      console.log(order);
       await orders.deleteOne({ _id: req.params.id });
       return res.status(200).json("order deleted");
     }

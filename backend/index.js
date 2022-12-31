@@ -21,14 +21,21 @@ mongoose
 
 app.use(
   cors({
-    origin: ["http://localhost:3001", "http://192.168.2.21:3001"],
+    origin: ["http://localhost:3001"],
     credentials: true,
   })
 );
 
-app.options("*", cors());
+app.get("*", function (_, res) {
+  res.sendFile(path.resolve("frontend", "build", "index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
@@ -39,3 +46,5 @@ app.use("/api", productRouter);
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started on port ", process.env.PORT || 3000);
 });
+
+module.exports = app;

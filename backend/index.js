@@ -13,7 +13,12 @@ const productRouter = require("./routes/productRoutes");
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => {
     console.log("successfully connected to DB");
     console.log(path.join(__dirname, "../frontend/build/index.html"));
@@ -36,17 +41,19 @@ app.use("/api", orderRouter);
 app.use("/api", customerRouter);
 app.use("/api", productRouter);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "../frontend/build/index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.get("*", function (_, res) {
+    res.sendFile(
+      path.join(__dirname, "../frontend/build/index.html"),
+      function (err) {
+        if (err) {
+          res.status(500).send(err);
+        }
       }
-    }
-  );
-});
+    );
+  });
+}
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("server started on port ", process.env.PORT || 3000);

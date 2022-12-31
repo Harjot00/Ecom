@@ -2,7 +2,7 @@
   "name": "Ecom app",
   "version": "1.0.0",
   "description": "Ecom application",
-  "main": "start.js",
+  "main": "start-client && start-server",
   "scripts": {
     "client": "",
     "start-client": "cd frontend && npm install && npm run build",

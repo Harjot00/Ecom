@@ -2,9 +2,9 @@
   "name": "Ecom app",
   "version": "1.0.0",
   "description": "Ecom application",
-  "main": "npm run start-client && npm run start-server",
+  "main": "",
   "scripts": {
-    "client": "",
+    "start": "npm run start-client && npm run start-server",
     "start-client": "cd frontend && npm install && npm run build",
     "start-server": "npm install && nodemon start backend/index.js"
   }

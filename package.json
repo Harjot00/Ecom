@@ -4,9 +4,8 @@
   "description": "Ecom application",
   "main": "start.js",
   "scripts": {
-    "build": "cd frontend && npm run build",
-    "install-client": "cd frontend && npm install",
-    "start": "npm backend/index.js",
-    "start-client": "cd frontend && npm start"
+    "client": "",
+    "start-client": "cd frontend && npm install && npm run build",
+    "start-server": "npm install && nodemon start backend/index.js"
   }
 }

@@ -8,9 +8,7 @@ import axios from "axios";
 function Shop() {
   const { category } = useParams();
   const fetchproducts = async () => {
-    const response = await axios.get(
-      `http://localhost:3000/api/getproductsby/${category}`
-    );
+    const response = await axios.get(`/api/getproductsby/${category}`);
 
     return response.data;
   };

@@ -21,7 +21,7 @@ function Login() {
   };
 
   const loginFn = async (data) => {
-    const response = await axios.post(`http://localhost:3000/api/login`, data, {
+    const response = await axios.post(`/api/login`, data, {
       credentials: "include",
       withCredentials: true,
     });

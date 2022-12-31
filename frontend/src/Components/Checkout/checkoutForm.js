@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function CheckoutForm(props) {
   const changeHandler = (event) => {
     props.setcustomerDetail({

@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 function Search() {
   const { query, category } = useParams();
   const fetchproducts = async () => {
-    const response = await axios.get(`http://localhost:3000/api/getproducts/`);
+    const response = await axios.get(`/api/getproducts/`);
 
     return response.data;
   };

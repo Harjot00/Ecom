@@ -26,14 +26,10 @@ function Signup() {
     setSignUpData({ ...signUpData, [event.target.name]: event.target.value });
   };
   const signUpFn = async (data) => {
-    const response = await axios.post(
-      `http://localhost:3000/api/signup`,
-      data,
-      {
-        credentials: "include",
-        withCredentials: true,
-      }
-    );
+    const response = await axios.post(`/api/signup`, data, {
+      credentials: "include",
+      withCredentials: true,
+    });
     return response.data;
   };
 

@@ -6,6 +6,6 @@
   "scripts": {
     "start": "npm run start-client && npm run start-server",
     "start-client": "cd frontend && npm install && npm run build",
-    "start-server": "npm install && nodemon start backend/index.js"
+    "start-server": "npm install && npm start backend/index.js"
   }
 }

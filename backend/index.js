@@ -16,6 +16,7 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("successfully connected to DB");
+    console.log(path.join(__dirname, "../frontend/build/index.html"));
   })
   .catch((err) => console.log(err));
 

@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "MERN BLOG APPLICATION",
+  "main": "start.js",
+  "scripts": {
+    "build": "cd frontend && npm run build",
+    "install-client": "cd frontend && npm install",
+    "start": "nodemon backend/start.js",
+    "start-client": "cd frontend && npm start"
+  }
+}

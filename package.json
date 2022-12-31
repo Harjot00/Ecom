@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cd frontend && npm run build",
     "install-client": "cd frontend && npm install",
-    "start": "nodemon backend/index.js",
+    "start": "npm backend/index.js",
     "start-client": "cd frontend && npm start"
   }
 }

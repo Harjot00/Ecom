@@ -22,12 +22,7 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-app.use(
-  cors({
-    origin: ["http://localhost:3000", "https://ecom-project-demo.vercel.app/"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

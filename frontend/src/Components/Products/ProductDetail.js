@@ -11,7 +11,9 @@ function ProductDetail() {
   const { cart } = useSelector((state) => state);
 
   const fetchproduct = async () => {
-    const response = await axios.get(`/api/getproduct/${productid}`);
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/api/getproduct/${productid}`
+    );
     return response.data;
   };
   const { category, productid } = useParams();

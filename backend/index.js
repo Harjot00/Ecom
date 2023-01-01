@@ -24,7 +24,7 @@ mongoose
 
 app.use(
   cors({
-    origin: ["http://localhost:3001"],
+    origin: ["http://localhost:3000", "https://ecom-project-demo.vercel.app/"],
     credentials: true,
   })
 );

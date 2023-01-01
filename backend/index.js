@@ -23,10 +23,7 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(function (req, res, next) {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://ecom-project-demo.vercel.app/"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"

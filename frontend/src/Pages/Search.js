@@ -6,9 +6,11 @@ import ProductCard from "../Components/Products/ProductCard";
 import { useParams } from "react-router-dom";
 
 function Search() {
-  const { query, category } = useParams();
+  const { query } = useParams();
   const fetchproducts = async () => {
-    const response = await axios.get(`/api/getproducts/`);
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/api/getproducts/`
+    );
 
     return response.data;
   };

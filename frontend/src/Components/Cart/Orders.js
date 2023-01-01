@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function Orders(props) {
   return (
     <div className="w-full border-t-2  border-gray-600 py-6 space-y-4 md:space-y-0 md:flex px-4 md:px-0 md:space-x-4  ">

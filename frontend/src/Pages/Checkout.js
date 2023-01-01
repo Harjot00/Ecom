@@ -48,10 +48,14 @@ function Checkout() {
   };
 
   const orderFn = async (data) => {
-    const response = await axios.post("/api/placeorder", data, {
-      credentials: "include",
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_API}/api/placeorder`,
+      data,
+      {
+        credentials: "include",
+        withCredentials: true,
+      }
+    );
     return response.data;
   };
 

@@ -41,10 +41,13 @@ function Profile() {
   );
 
   const apiRequest = async (id) => {
-    const response = await axios.delete(`/api/cancelOrder/${id}`, {
-      credentials: "include",
-      withCredentials: true,
-    });
+    const response = await axios.delete(
+      `${process.env.REACT_APP_API}/api/cancelOrder/${id}`,
+      {
+        credentials: "include",
+        withCredentials: true,
+      }
+    );
     return await response.data;
   };
 

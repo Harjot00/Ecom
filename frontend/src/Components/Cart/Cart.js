@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { IconContext } from "react-icons/";
 import { useSelector } from "react-redux";

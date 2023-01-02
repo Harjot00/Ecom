@@ -26,6 +26,7 @@ app.use(
   cors({
     options: {
       origin: "https://ecom-project-demo.vercel.app",
+      method: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
     },
   })

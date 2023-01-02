@@ -57,7 +57,8 @@ function ProductDetail() {
           <p className=" space-x-2 md:text-lg font-semibold">
             <span className=" px-1 md:px-4">Shop</span>
             <span className="border-l-2 px-2 md:px-4 border-gray-400">
-              {category[0].toUpperCase() + category.slice(1).toLowerCase()}
+              {product.category[0].toUpperCase() +
+                product.category.slice(1).toLowerCase()}
             </span>
             <span className="border-l-2 px-2 md:px-4 border-gray-400 text-gray-400 font-normal">
               {product.name}

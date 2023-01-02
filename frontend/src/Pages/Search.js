@@ -1,4 +1,4 @@
-import React from "react";
+import { useReducer, useEffect, useState } from "react";
 import Container from "../Components/Container/Container";
 import axios from "axios";
 import { useQuery } from "react-query";
@@ -16,20 +16,25 @@ function Search() {
   };
   window.scroll(0, 0);
 
-  const {
-    isLoading,
-    isError,
-    data: products,
-    error,
-  } = useQuery("products", fetchproducts, {
-    retry: 3,
-  });
+  const [availableProducts, setAvailableProducts] = useState([]);
 
-  const availableProducts = products.filter((item) => {
-    if (item.name.includes(query)) {
-      return item;
+  const { isLoading, isError, data, error, isSuccess } = useQuery(
+    "products",
+    fetchproducts,
+    {
+      retry: 3,
     }
-  });
+  );
+
+  useEffect(() => {
+    if (isSuccess) {
+      const products = data.filter((product) => {
+        return product.name.includes(query);
+      });
+
+      setAvailableProducts(products);
+    }
+  }, [data, isSuccess, query]);
 
   return (
     <Container>

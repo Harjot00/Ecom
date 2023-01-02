@@ -25,6 +25,8 @@ function Shop() {
     retry: 3,
   });
 
+  console.log(products);
+
   return (
     <Container>
       <div className="bg-white md:min-h-[470px]  lg:min-h-[570px]">

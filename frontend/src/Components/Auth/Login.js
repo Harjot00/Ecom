@@ -21,10 +21,14 @@ function Login() {
   };
 
   const loginFn = async (data) => {
-    const response = await axios.post(`/api/login`, data, {
-      credentials: "include",
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_API}/api/login`,
+      data,
+      {
+        credentials: "include",
+        withCredentials: true,
+      }
+    );
     return await response.data;
   };
   const mutation = useMutation(() => loginFn(loginData), {

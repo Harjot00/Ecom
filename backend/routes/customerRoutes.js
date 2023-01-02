@@ -83,10 +83,12 @@ router.post("/login", async (req, res) => {
       const accessToken = createToken(customer);
       res.cookie("access_token", accessToken, {
         httpOnly: true,
+        sameSite: "strict",
         secure: true,
       });
       res.cookie("customer_id", customer._id, {
         httpOnly: true,
+        sameSite: "strict",
         secure: true,
       });
 

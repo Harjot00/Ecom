@@ -22,18 +22,8 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-app.use(
-  cors({
-    origin: "https://ecom-project-demo.vercel.app",
-    credentials: true,
-  })
-);
-
 app.use(function (req, res, next) {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://ecom-project-demo.vercel.app"
-  );
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"

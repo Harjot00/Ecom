@@ -47,12 +47,12 @@ router.post("/signup", async (req, res) => {
 
         res.cookie("access_token", accessToken, {
           httpOnly: true,
-          sameSite: "none",
+          sameSite: "strict",
           secure: false,
         });
         res.cookie("customer_id", newCustomer._id, {
           httpOnly: true,
-          sameSite: "none",
+          sameSite: "strict",
           secure: false,
         });
         res.status(200).json({ loggedIn: true });

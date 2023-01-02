@@ -26,6 +26,7 @@ function Login() {
       data,
       {
         credentials: "include",
+        contentType: "application/json",
         withCredentials: true,
       }
     );

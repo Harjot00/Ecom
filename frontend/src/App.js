@@ -20,6 +20,7 @@ function App() {
       retryDelay: 3000,
     },
   });
+  console.log(process.env);
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>

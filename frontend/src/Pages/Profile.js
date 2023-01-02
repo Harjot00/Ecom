@@ -26,6 +26,7 @@ function Profile() {
           state: state.filter((order) => order._id !== action.payload),
         };
       }
+
       default:
         return state;
     }

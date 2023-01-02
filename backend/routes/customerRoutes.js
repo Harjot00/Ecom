@@ -52,7 +52,7 @@ router.post("/signup", async (req, res) => {
         });
         res.cookie("customer_id", newCustomer._id, {
           httpOnly: true,
-          sameSite: false,
+          sameSite: "none",
           secure: true,
         });
         res.status(200).json({ loggedIn: true });

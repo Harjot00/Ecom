@@ -1,8 +1,8 @@
-import { useState, useReducer } from "react";
+import { useReducer } from "react";
 import Container from "../Components/Container/Container";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { logout } from "../Reducers/auth";
 import { useDispatch } from "react-redux";
@@ -35,10 +35,7 @@ function Profile() {
       dispatch({ type: "delete", payload: idx });
     });
   };
-  const [orders, dispatch] = useReducer(
-    orderReducer,
-    data || data.length > 0 ? data : []
-  );
+  const [orders, dispatch] = useReducer(orderReducer, isSuccess ? data : []);
 
   const apiRequest = async (id) => {
     const response = await axios.delete(

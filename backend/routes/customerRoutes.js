@@ -47,9 +47,11 @@ router.post("/signup", async (req, res) => {
 
         res.cookie("access_token", accessToken, {
           sameSite: "strict",
+          httpOnly: false,
           secure: true,
         });
         res.cookie("customer_id", newCustomer._id, {
+          httpOnly: false,
           sameSite: "strict",
           secure: true,
         });

@@ -46,14 +46,12 @@ router.post("/signup", async (req, res) => {
         const accessToken = createToken(newCustomer);
 
         res.cookie("access_token", accessToken, {
-          httpOnly: true,
           sameSite: "strict",
-          secure: false,
+          secure: true,
         });
         res.cookie("customer_id", newCustomer._id, {
-          httpOnly: true,
           sameSite: "strict",
-          secure: false,
+          secure: true,
         });
         res.status(200).json({ loggedIn: true });
       })

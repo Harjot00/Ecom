@@ -25,7 +25,9 @@ mongoose
 app.use(
   cors({
     options: {
+      origin: "https://ecom-project-demo.vercel.app",
       credentials: true,
+      optionSuccessStatus: 200,
     },
   })
 );

@@ -22,7 +22,7 @@ const cartReducer = createSlice({
       let found = false;
       let index = 0;
       for (let i = 0; i < state.length; i++) {
-        if (state[i].id === payload.payload.id) {
+        if (state[i]._id === payload.payload._id) {
           found = true;
           index = i;
           break;

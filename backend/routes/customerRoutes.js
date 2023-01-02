@@ -45,11 +45,16 @@ router.post("/signup", async (req, res) => {
       .then(() => {
         const accessToken = createToken(newCustomer);
 
-        res.setHeader("Set-Cookie", [
-          `accessToken=${accessToken}; HttpOnly;  Secure=True;`,
-          `customer_id=${newCustomer._id}; HttpOnly;Secure=True;`,
-        ]);
-
+        res.cookie("access_token", accessToken, {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+        });
+        res.cookie("customer_id", newCustomer._id, {
+          httpOnly: true,
+          sameSite: "none",
+          secure: true,
+        });
         res.status(200).json({ loggedIn: true });
       })
       .catch((err) => {

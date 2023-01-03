@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import Header from "./Components/Header/Header";
 import Home from "./Pages/Home";
 import Product from "./Pages/Products";
@@ -20,6 +22,12 @@ function App() {
       retryDelay: 3000,
     },
   });
+
+  const { cart } = useSelector((state) => state);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>

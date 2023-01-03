@@ -4,12 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function CartItems(props) {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state);
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-  console.log(props);
   return (
     <div className="w-full border-t-2  border-gray-600 py-6 space-y-4 md:space-y-0 md:flex px-4 md:px-0 md:space-x-4  ">
       <div className="md:h-[150px]  h-[200px] aspect-square mx-auto">

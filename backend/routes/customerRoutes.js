@@ -46,13 +46,15 @@ router.post("/signup", async (req, res) => {
         const accessToken = createToken(newCustomer);
 
         res.cookie("access_token", accessToken, {
-          sameSite: "strict",
+          sameSite: "none",
+          domain: process.env.DOMAIN,
           httpOnly: false,
           secure: true,
         });
         res.cookie("customer_id", newCustomer._id, {
           httpOnly: false,
-          sameSite: "strict",
+          sameSite: "none",
+          domain: process.env.DOMAIN,
           secure: true,
         });
         res.status(200).json({ loggedIn: true });
@@ -84,11 +86,13 @@ router.post("/login", async (req, res) => {
       res.cookie("access_token", accessToken, {
         httpOnly: false,
         sameSite: "none",
+        domain: process.env.DOMAIN,
         secure: true,
       });
       res.cookie("customer_id", customer._id, {
         httpOnly: false,
         sameSite: "none",
+        domain: process.env.DOMAIN,
         secure: true,
       });
 

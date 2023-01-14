@@ -86,13 +86,13 @@ router.post("/login", async (req, res) => {
       res.cookie("access_token", accessToken, {
         httpOnly: false,
         sameSite: "none",
-        domain: ".ecom-project-demo.vercel.app/",
+        domain: "vercel.app/",
         secure: true,
       });
       res.cookie("customer_id", customer._id, {
         httpOnly: false,
         sameSite: "none",
-        domain: ".ecom-project-demo.vercel.app/",
+        domain: "vercel.app/",
         secure: true,
       });
 

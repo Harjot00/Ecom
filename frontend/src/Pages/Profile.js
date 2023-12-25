@@ -19,9 +19,6 @@ function Profile() {
 
     return response.data;
   };
-  const { data: allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
-    refetchOnWindowFocus: false,
-  });
 
   const orderReducer = (state, action) => {
     switch (action.type) {
@@ -48,9 +45,9 @@ function Profile() {
   const [orders, dispatch] = useReducer(orderReducer, []);
 
   useEffect(() => {
-    console.log(allOrders);
-    dispatch({ action: "initialize", payload: allOrders });
-  }, [allOrders]);
+    const data = fetchProfileData();
+    dispatch({ action: "initialize", payload: data });
+  }, []);
 
   const apiRequest = async (id) => {
     const response = await axios.delete(
@@ -75,7 +72,6 @@ function Profile() {
     navigate("/");
   };
 
-  console.log(isSuccess, allOrders);
   return (
     <Container>
       <div className=" my-8 md:px-12 min-h-[400px] md:min-h-[560px] lg:min-h-[773px]">
@@ -90,7 +86,7 @@ function Profile() {
               Logout
             </button>
           </div>
-          {isSuccess && orders.length > 0 ? (
+          {orders.length > 0 ? (
             orders.map((order, index) => {
               return (
                 <div

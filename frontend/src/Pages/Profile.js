@@ -19,10 +19,6 @@ function Profile() {
     console.log(response.data);
     return response.data;
   };
-  const { allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
-    refetchOnWindowFocus: false,
-    retry: 3,
-  });
 
   const orderReducer = (state, action) => {
     switch (action.type) {
@@ -42,11 +38,9 @@ function Profile() {
   const [orders, dispatch] = useReducer(orderReducer, []);
 
   useEffect(() => {
-    if (isSuccess) {
-      dispatch(allOrders);
-    }
+    dispatch(fetchProfileData);
     console.log(orders);
-  }, [allOrders, isSuccess]);
+  }, []);
 
   const apiRequest = async (id) => {
     const response = await axios.delete(

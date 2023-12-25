@@ -104,10 +104,8 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/allorders", validateToken, async (req, res) => {
-  let allOrders;
-
   try {
-    allOrders = await customers
+    const customer = await customers
       .findOne({ _id: req.cookies["customer_id"] })
       .populate({
         path: "orders",
@@ -116,24 +114,20 @@ router.get("/allorders", validateToken, async (req, res) => {
         },
       });
 
-    const customerOrders = [];
-
-    for (const order of allOrders.orders) {
-      customerOrders.push({
-        id: order._id,
-        details: order.orderDetail,
-        products: order.products,
-      });
+    if (!customer) {
+      return res.status(404).json({ error: "No customer found" });
     }
 
-    if (!customerOrders) {
-      return res.status(404).json("no customer found");
-    } else {
-      return res.status(200).json(customerOrders);
-    }
+    const customerOrders = customer.orders.map((order) => ({
+      id: order._id,
+      details: order.orderDetail,
+      products: order.products,
+    }));
+
+    return res.status(200).json(customerOrders);
   } catch (err) {
-    console.log(err);
-    return res.status(500).json(err);
+    console.error(err);
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 

@@ -53,14 +53,7 @@ app.use("/api", customerRouter);
 app.use("/api", productRouter);
 
 if (process.env.NODE_ENV == "production") {
-  app.use(
-    express.static(
-      path.join(__dirname, "../frontend/build", {
-        etag: false,
-      }),
-      { maxAge: "1d" }
-    )
-  );
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
   app.get("*", function (_, res) {
     res.sendFile(
       path.join(__dirname, "../frontend/build/index.html"),
@@ -73,7 +66,7 @@ if (process.env.NODE_ENV == "production") {
   });
 }
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log("server started on port ", process.env.PORT || 3000);
 });
 

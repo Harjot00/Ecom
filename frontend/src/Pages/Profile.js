@@ -21,6 +21,7 @@ function Profile() {
   };
   const { allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
     refetchOnWindowFocus: false,
+    retry: 3,
   });
 
   const orderReducer = (state, action) => {
@@ -87,7 +88,7 @@ function Profile() {
               Logout
             </button>
           </div>
-          {orders ? (
+          {isSuccess ? (
             orders.map((order, index) => {
               return (
                 <div

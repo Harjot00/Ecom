@@ -30,8 +30,6 @@ function Profile() {
         return state.filter((order) => order._id !== action.payload);
       }
 
-      
-
       default:
         return action.payload;
     }
@@ -87,7 +85,7 @@ function Profile() {
               Logout
             </button>
           </div>
-          { (
+          {orders ? (
             orders.map((order, index) => {
               return (
                 <div

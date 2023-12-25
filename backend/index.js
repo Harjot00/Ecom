@@ -40,14 +40,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.disable("etag");
+
 app.use("/api", orderRouter);
 app.use("/api", customerRouter);
 app.use("/api", productRouter);
 
 if (process.env.NODE_ENV == "production") {
   app.use(
-    express.static(path.join(__dirname, "../frontend/build"), { maxAge: "1d" })
+    express.static(
+      path.join(__dirname, "../frontend/build", {
+        etag: false,
+      }),
+      { maxAge: "1d" }
+    )
   );
   app.get("*", function (_, res) {
     res.sendFile(

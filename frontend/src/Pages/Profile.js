@@ -9,10 +9,13 @@ import { useDispatch } from "react-redux";
 
 function Profile() {
   const fetchProfileData = async () => {
-    const response = await axios.get(`http://localhost:3000/api/allOrders`, {
-      credentials: "include",
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/api/allOrders`,
+      {
+        credentials: "include",
+        withCredentials: true,
+      }
+    );
     return response.data;
   };
   const { data, isSuccess } = useQuery("profile", fetchProfileData, {

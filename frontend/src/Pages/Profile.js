@@ -38,7 +38,7 @@ function Profile() {
   const [orders, dispatch] = useReducer(orderReducer, []);
 
   useEffect(() => {
-    dispatch(fetchProfileData);
+    dispatch(fetchProfileData());
   }, []);
 
   const apiRequest = async (id) => {

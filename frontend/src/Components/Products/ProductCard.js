@@ -30,21 +30,20 @@ function ProductCard(props) {
         </div>
       </Link>
 
-      <button
+      <div
         className={
           added
             ? "w-full text-md font-bold py-3 bg-green-600  mt-3 rounded-md text-white "
             : "w-full text-md font-bold py-3 bg-gray-700 hover:bg-black mt-3 rounded-md text-white"
         }
         onClick={(e) => {
-          e.preventDefault();
           dispatch(addToCart(props));
 
           setAdded(true);
         }}
       >
         {added ? "Item added to bag" : "add to bag"}
-      </button>
+      </div>
     </div>
   );
 }

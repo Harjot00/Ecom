@@ -63,7 +63,7 @@ function Profile() {
     localStorage.removeItem("isLoggedIn");
     navigate("/");
   };
-  console.log(isSuccess);
+  console.log(orders);
   return (
     <Container>
       <div className=" my-8 md:px-12 min-h-[400px] md:min-h-[560px] lg:min-h-[773px]">

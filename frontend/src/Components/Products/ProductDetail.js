@@ -121,7 +121,7 @@ function ProductDetail() {
               <div className="flex justify-between mt-10">
                 <p>Quantity</p>
                 <div className="flex space-x-2">
-                  <button
+                  <div
                     type="button"
                     className="w-[25px]  p-4 flex justify-center items-center rounded-md text-4xl"
                     onClick={(e) => {
@@ -133,7 +133,7 @@ function ProductDetail() {
                     }}
                   >
                     +
-                  </button>
+                  </div>
 
                   <div className="w-[25px] border-2 border-gray-500 p-4 flex justify-center items-center rounded-md">
                     {quantity}
@@ -223,7 +223,7 @@ function ProductDetail() {
                 </RadioGroup>
               </div>
 
-              <button
+              <div
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
@@ -238,7 +238,7 @@ function ProductDetail() {
                 }
               >
                 {added ? "Item added to bag" : "Add to bag"}
-              </button>
+              </div>
             </form>
           </div>
           <div className="mt-8 space-y-4">

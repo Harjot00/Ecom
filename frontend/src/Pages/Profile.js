@@ -16,6 +16,7 @@ function Profile() {
         withCredentials: true,
       }
     );
+    console.log(response.data);
     return response.data;
   };
   const { data, isSuccess } = useQuery("profile", fetchProfileData, {
@@ -63,7 +64,7 @@ function Profile() {
     localStorage.removeItem("isLoggedIn");
     navigate("/");
   };
-  console.log(orders);
+  console.log(isSuccess, orders);
   return (
     <Container>
       <div className=" my-8 md:px-12 min-h-[400px] md:min-h-[560px] lg:min-h-[773px]">

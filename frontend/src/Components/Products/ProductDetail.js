@@ -143,6 +143,7 @@ function ProductDetail() {
                     className="w-[25px] p-4 flex justify-center items-center rounded-md text-4xl"
                     onClick={(e) => {
                       e.preventDefault();
+                      e.stopPropagation();
                       if (quantity >= 2) {
                         setQuantity(quantity - 1);
                       }
@@ -223,7 +224,7 @@ function ProductDetail() {
                 </RadioGroup>
               </div>
 
-              <div
+              <button
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
@@ -238,7 +239,7 @@ function ProductDetail() {
                 }
               >
                 {added ? "Item added to bag" : "Add to bag"}
-              </div>
+              </button>
             </form>
           </div>
           <div className="mt-8 space-y-4">

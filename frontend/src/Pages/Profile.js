@@ -64,7 +64,7 @@ function Profile() {
     localStorage.removeItem("isLoggedIn");
     navigate("/");
   };
-  console.log(isSuccess, orders);
+
   return (
     <Container>
       <div className=" my-8 md:px-12 min-h-[400px] md:min-h-[560px] lg:min-h-[773px]">
@@ -79,7 +79,7 @@ function Profile() {
               Logout
             </button>
           </div>
-          {isSuccess && orders.length > 0 ? (
+          {isSuccess && data.length > 0 ? (
             orders.map((order, index) => {
               return (
                 <div

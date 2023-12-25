@@ -16,14 +16,13 @@ function Shop() {
   };
   window.scroll(0, 0);
 
-  const {
-    isLoading,
-    isError,
-    data: products,
-    error,
-  } = useQuery("products", fetchproducts, {
-    retry: 3,
-  });
+  const { isLoading, isError, products, error } = useQuery(
+    "products",
+    fetchproducts,
+    {
+      retry: 3,
+    }
+  );
 
   return (
     <Container>

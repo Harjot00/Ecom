@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 function Profile() {
   const fetchProfileData = async () => {
     const response = await axios.get(
-      `${process.env.REACT_APP_API}/api/allOrders`,
+      `${process.env.REACT_APP_API}api/allOrders`,
       {
         credentials: "include",
         withCredentials: true,
@@ -63,7 +63,7 @@ function Profile() {
     localStorage.removeItem("isLoggedIn");
     navigate("/");
   };
-
+  console.log(isSuccess);
   return (
     <Container>
       <div className=" my-8 md:px-12 min-h-[400px] md:min-h-[560px] lg:min-h-[773px]">

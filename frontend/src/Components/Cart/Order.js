@@ -37,6 +37,7 @@ function Order(props) {
       <button
         className="w-full font-bold text-xl py-3 bg-gray-700 hover:bg-black  rounded-md text-white mt-8"
         onClick={(e) => {
+          e.preventDefault();
           if (props.page === "shipment") {
             props.submitHandler(e);
           } else {

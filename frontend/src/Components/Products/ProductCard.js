@@ -36,7 +36,8 @@ function ProductCard(props) {
             ? "w-full text-md font-bold py-3 bg-green-600  mt-3 rounded-md text-white "
             : "w-full text-md font-bold py-3 bg-gray-700 hover:bg-black mt-3 rounded-md text-white"
         }
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           dispatch(addToCart(props));
 
           setAdded(true);

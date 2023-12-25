@@ -25,7 +25,9 @@ mongoose
 app.use(function (req, res, next) {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    process.env.DOMAIN || "http://localhost:3000/"
+    process.env.DOMAIN || "http://localhost:3000/",
+    "Cache-Control",
+    "no-store"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",

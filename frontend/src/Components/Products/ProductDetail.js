@@ -124,7 +124,8 @@ function ProductDetail() {
                   <button
                     type="button"
                     className="w-[25px]  p-4 flex justify-center items-center rounded-md text-4xl"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       if (quantity <= 4) {
                         setQuantity(quantity + 1);
                         product.quantity = quantity;
@@ -140,7 +141,8 @@ function ProductDetail() {
                   <button
                     type="button"
                     className="w-[25px] p-4 flex justify-center items-center rounded-md text-4xl"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       if (quantity >= 2) {
                         setQuantity(quantity - 1);
                       }
@@ -224,6 +226,7 @@ function ProductDetail() {
               <button
                 type="button"
                 onClick={(e) => {
+                  e.preventDefault();
                   dispatch(addToCart(product));
 
                   setAdded(true);

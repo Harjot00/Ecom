@@ -49,7 +49,7 @@ function Profile() {
 
   useEffect(() => {
     dispatch({ action: "initialize", payload: allOrders });
-  }, [isSuccess, allOrders]);
+  }, [allOrders]);
 
   const apiRequest = async (id) => {
     const response = await axios.delete(

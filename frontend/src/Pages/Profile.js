@@ -19,15 +19,25 @@ function Profile() {
     console.log(response.data);
     return response.data;
   };
+  const { allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
+    refetchOnWindowFocus: false,
+  });
 
   const orderReducer = (state, action) => {
     switch (action.type) {
       case "delete": {
-        return state.filter((order) => order._id !== action.payload);
+        return {
+          state: state.filter((order) => order._id !== action.payload),
+        };
       }
 
+      case "initialize": {
+        return {
+          state: action.payload,
+        };
+      }
       default:
-        return action.payload;
+        return state;
     }
   };
   const cancelOrder = async (orderId, idx) => {
@@ -35,11 +45,14 @@ function Profile() {
       dispatch({ type: "delete", payload: idx });
     });
   };
-  const [orders, dispatch] = useReducer(orderReducer, []);
+  const [orders, dispatch] = useReducer(
+    orderReducer,
+    isSuccess ? allOrders : []
+  );
 
   useEffect(() => {
-    dispatch(fetchProfileData());
-  }, []);
+    dispatch({ action: "initialize", payload: allOrders });
+  }, [allOrders]);
 
   const apiRequest = async (id) => {
     const response = await axios.delete(
@@ -63,7 +76,7 @@ function Profile() {
     localStorage.removeItem("isLoggedIn");
     navigate("/");
   };
-  console.log(orders);
+
   return (
     <Container>
       <div className=" my-8 md:px-12 min-h-[400px] md:min-h-[560px] lg:min-h-[773px]">
@@ -78,7 +91,7 @@ function Profile() {
               Logout
             </button>
           </div>
-          {orders ? (
+          {isSuccess && orders.length > 0 ? (
             orders.map((order, index) => {
               return (
                 <div

@@ -16,7 +16,7 @@ function Profile() {
         withCredentials: true,
       }
     );
-    console.log(response.data);
+
     return response.data;
   };
   const { allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
@@ -48,6 +48,7 @@ function Profile() {
   const [orders, dispatch] = useReducer(orderReducer, []);
 
   useEffect(() => {
+    console.log(allOrders);
     dispatch({ action: "initialize", payload: allOrders });
   }, [allOrders]);
 

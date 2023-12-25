@@ -45,10 +45,7 @@ function Profile() {
       dispatch({ type: "delete", payload: idx });
     });
   };
-  const [orders, dispatch] = useReducer(
-    orderReducer,
-    isSuccess ? allOrders : []
-  );
+  const [orders, dispatch] = useReducer(orderReducer, []);
 
   useEffect(() => {
     dispatch({ action: "initialize", payload: allOrders });
@@ -77,6 +74,7 @@ function Profile() {
     navigate("/");
   };
 
+  console.log(isSuccess, orders);
   return (
     <Container>
       <div className=" my-8 md:px-12 min-h-[400px] md:min-h-[560px] lg:min-h-[773px]">

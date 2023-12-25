@@ -19,7 +19,7 @@ function Profile() {
 
     return response.data;
   };
-  const { allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
+  const { data: allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
     refetchOnWindowFocus: false,
   });
 
@@ -75,7 +75,7 @@ function Profile() {
     navigate("/");
   };
 
-  console.log(isSuccess, orders);
+  console.log(isSuccess, allOrders);
   return (
     <Container>
       <div className=" my-8 md:px-12 min-h-[400px] md:min-h-[560px] lg:min-h-[773px]">

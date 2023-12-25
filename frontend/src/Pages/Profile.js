@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import Container from "../Components/Container/Container";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -31,6 +31,10 @@ function Profile() {
         };
       }
 
+      case "initialize": {
+        return action.payload;
+      }
+
       default:
         return state;
     }
@@ -40,10 +44,13 @@ function Profile() {
       dispatch({ type: "delete", payload: idx });
     });
   };
-  const [orders, dispatch] = useReducer(
-    orderReducer,
-    isSuccess ? allOrders : []
-  );
+  const [orders, dispatch] = useReducer(orderReducer, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch({ type: "initialize", payload: allOrders });
+    }
+  }, [allOrders, isSuccess]);
 
   const apiRequest = async (id) => {
     const response = await axios.delete(
@@ -82,8 +89,8 @@ function Profile() {
               Logout
             </button>
           </div>
-          {isSuccess && allOrders.length > 0 ? (
-            allOrders.map((order, index) => {
+          {isSuccess && orders.length > 0 ? (
+            orders.map((order, index) => {
               return (
                 <div
                   key={index}

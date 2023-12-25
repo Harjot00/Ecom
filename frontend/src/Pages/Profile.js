@@ -19,16 +19,14 @@ function Profile() {
     console.log(response.data);
     return response.data;
   };
-  const { data: allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
+  const { allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
     refetchOnWindowFocus: false,
   });
 
   const orderReducer = (state, action) => {
     switch (action.type) {
       case "delete": {
-        return {
-          state: state.filter((order) => order._id !== action.payload),
-        };
+        return state.filter((order) => order._id !== action.payload);
       }
 
       case "initialize": {
@@ -89,7 +87,7 @@ function Profile() {
               Logout
             </button>
           </div>
-          {isSuccess && orders.length > 0 ? (
+          {orders ? (
             orders.map((order, index) => {
               return (
                 <div

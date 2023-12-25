@@ -19,7 +19,7 @@ function Profile() {
     console.log(response.data);
     return response.data;
   };
-  const { data, isSuccess } = useQuery("profile", fetchProfileData, {
+  const { data: allOrders, isSuccess } = useQuery("profile", fetchProfileData, {
     refetchOnWindowFocus: false,
   });
 
@@ -79,8 +79,8 @@ function Profile() {
               Logout
             </button>
           </div>
-          {isSuccess && data.length > 0 ? (
-            orders.map((order, index) => {
+          {isSuccess && allOrders.length > 0 ? (
+            allOrders.map((order, index) => {
               return (
                 <div
                   key={index}

@@ -30,12 +30,10 @@ function Profile() {
         return state.filter((order) => order._id !== action.payload);
       }
 
-      case "initialize": {
-        return action.payload;
-      }
+      
 
       default:
-        return state;
+        return action.payload;
     }
   };
   const cancelOrder = async (orderId, idx) => {
@@ -47,8 +45,9 @@ function Profile() {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch({ type: "initialize", payload: allOrders });
+      dispatch(allOrders);
     }
+    console.log(orders);
   }, [allOrders, isSuccess]);
 
   const apiRequest = async (id) => {
@@ -88,7 +87,7 @@ function Profile() {
               Logout
             </button>
           </div>
-          {isSuccess ? (
+          { (
             orders.map((order, index) => {
               return (
                 <div

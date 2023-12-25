@@ -40,7 +40,10 @@ function Profile() {
       dispatch({ type: "delete", payload: idx });
     });
   };
-  const [orders, dispatch] = useReducer(orderReducer, isSuccess ? data : []);
+  const [orders, dispatch] = useReducer(
+    orderReducer,
+    isSuccess ? allOrders : []
+  );
 
   const apiRequest = async (id) => {
     const response = await axios.delete(

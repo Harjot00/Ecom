@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 import Container from "../Components/Container/Container";
 import ProductCard from "../Components/Products/ProductCard";
 import { useQuery } from "react-query";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 function Shop() {
   const { category } = useParams();
+  const { cart } = useSelector((state) => state);
   const fetchproducts = async () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API}/api/getproductsby/${category}`
@@ -14,8 +17,9 @@ function Shop() {
 
     return response.data;
   };
-  window.scroll(0, 0);
-
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   const {
     isLoading,
     isError,

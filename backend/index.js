@@ -23,7 +23,10 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", process.env.DOMAIN);
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    process.env.DOMAIN || process.env.DOMAIN2
+  );
   res.setHeader(
     "Cache-Control", // <- Add this line to set Cache-Control header
     "no-store"

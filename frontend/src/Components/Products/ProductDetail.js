@@ -44,8 +44,6 @@ function ProductDetail() {
     product.color = e;
   };
 
-  window.scroll(0, 0);
-
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);

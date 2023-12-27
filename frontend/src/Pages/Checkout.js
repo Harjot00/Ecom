@@ -82,17 +82,11 @@ function Checkout() {
   return (
     <Container>
       <div className="mt-4 md:mt-12 mb-8 md:px-4 py-8 grid grid-cols-4 md:gap-x-4 bg-gray-100 rounded-md drop-shadow-lg">
-        <div className="col-span-4 md:col-span-2">
+        <div className="col-span-4 md:col-span-full">
           <CheckoutForm
             customerDetail={customerDetail}
             setcustomerDetail={setcustomerDetail}
           />
-        </div>
-        <div className="col-span-4 md:col-span-2 max-h-[800px] overflow-y-scroll  lg:p-8">
-          {cart.length > 0 &&
-            cart.map((item, idx) => {
-              return <CartItem key={idx} {...item} />;
-            })}
           <Order page={"shipment"} submitHandler={submitHandler} />
         </div>
       </div>

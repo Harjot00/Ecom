@@ -46,7 +46,7 @@ function Order(props) {
           }
         }}
       >
-        {props === null ? "Place Order" : "Checkout"}
+        {props.page === "shipment" ? "Place order" : "Checkout"}
       </button>
     </div>
   );

@@ -2,15 +2,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Reducers/cart";
-import { useSelector } from "react-redux";
 
 function ProductCard(props) {
-  const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
   const [added, setAdded] = useState(false);
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
 
   return (
     <div key={props._id} className="">

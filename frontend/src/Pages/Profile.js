@@ -77,7 +77,7 @@ function Profile() {
             </button>
           </div>
 
-          {order ? (
+          {order && order.length > 0 ? (
             order.map((order, index) => {
               return (
                 <div

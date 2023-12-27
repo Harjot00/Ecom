@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState } from "react";
 import Container from "../Components/Container/Container";
 import { useQuery } from "react-query";
 import axios from "axios";
@@ -20,34 +20,24 @@ function Profile() {
     return response.data;
   };
 
-  const orderReducer = (state, action) => {
-    switch (action.type) {
-      case "delete": {
-        return {
-          state: state.filter((order) => order._id !== action.payload),
-        };
-      }
+  const { data, isSuccess, isLoading, isError } = useQuery(
+    "orders",
+    fetchProfileData
+  );
 
-      case "initialize": {
-        return {
-          state: action.payload,
-        };
-      }
-      default:
-        return state;
-    }
-  };
+  const [order, setOrder] = useState([]);
+
   const cancelOrder = async (orderId, idx) => {
     mutation.mutateAsync(orderId).then((res) => {
-      dispatch({ type: "delete", payload: idx });
+      setOrder((state) => {
+        return state.filter((order, id) => id !== idx);
+      });
     });
   };
-  const [orders, dispatch] = useReducer(orderReducer, []);
 
   useEffect(() => {
-    const data = fetchProfileData();
-    dispatch({ action: "initialize", payload: data });
-  }, []);
+    setOrder(data);
+  }, [isSuccess]);
 
   const apiRequest = async (id) => {
     const response = await axios.delete(
@@ -86,8 +76,9 @@ function Profile() {
               Logout
             </button>
           </div>
-          {orders.length > 0 ? (
-            orders.map((order, index) => {
+
+          {order ? (
+            order.map((order, index) => {
               return (
                 <div
                   key={index}

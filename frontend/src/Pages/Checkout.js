@@ -63,7 +63,7 @@ function Checkout() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (isLoggedIn === false) {
+    if (isLoggedIn === undefined) {
       navigate("/login");
     } else {
       mutation
@@ -78,11 +78,12 @@ function Checkout() {
         });
     }
   };
+  console.log(isLoggedIn);
 
   return (
     <Container>
       <div className="mt-4 md:mt-12 mb-8 md:px-4 py-8 grid grid-cols-4 md:gap-x-4 bg-gray-100 rounded-md drop-shadow-lg">
-        <div className="col-span-4 md:col-span-full">
+        <div className="col-span-4 md:col-span-2">
           <CheckoutForm
             customerDetail={customerDetail}
             setcustomerDetail={setcustomerDetail}

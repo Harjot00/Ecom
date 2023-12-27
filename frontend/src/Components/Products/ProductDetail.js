@@ -48,6 +48,10 @@ function ProductDetail() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (isSuccess) {
     return (
       <div className="my-8 py-8 grid grid-cols-2 gap-x-4 ">

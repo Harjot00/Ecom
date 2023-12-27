@@ -23,11 +23,6 @@ function App() {
     },
   });
 
-  const { cart } = useSelector((state) => state);
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>

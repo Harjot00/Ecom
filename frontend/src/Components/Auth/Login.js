@@ -9,6 +9,7 @@ import { login } from "../../Reducers/auth";
 function Login() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state);
+  const [wrongPassword, setwrongPassword] = useState(false);
 
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
@@ -51,7 +52,12 @@ function Login() {
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response && err.response.status === 404) {
+          setwrongPassword(true);
+        } else {
+          // Handle other errors
+          console.error("An error occurred:", err.message);
+        }
       });
   };
 
@@ -94,6 +100,11 @@ function Login() {
             >
               Signup
             </button>
+            {wrongPassword ? (
+              <div className="mt-3"> wrong password or email</div>
+            ) : (
+              ""
+            )}
           </div>
         </form>
       </div>

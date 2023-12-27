@@ -41,13 +41,15 @@ function Signup() {
     retry: 3,
   });
 
-  const authFn = async () => {
-    mutation.mutate(signUpData);
-    if (mutation.isSuccess) {
-      dispatch(login(mutation.data));
-      localStorage.setItem("isLoggedIn", true);
-      navigate("/");
-    }
+  const authFn = () => {
+    mutation.mutate(signUpData, {
+      onSuccess: (data) => {
+        console.log(data);
+        dispatch(login(data));
+        localStorage.setItem("isLoggedIn", true);
+        navigate("/");
+      },
+    });
   };
 
   return (
